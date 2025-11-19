@@ -1,0 +1,158 @@
+{% extends "layout.html" %}
+{% block title %}TrabajoHoy - Panel Empresarial{% endblock %}
+
+{% block content %}
+<!-- Mostrar los mensajes flash justo debajo de la navbar -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="alert-container">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="mb-4">Bienvenido, {{ session.get('empresa_nombre') }}</h1>
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Panel de Control de Empresa</h5>
+          <p class="card-text">Desde aquí puedes gestionar tus ofertas de empleo y ver los candidatos interesados.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card shadow-sm mb-4 h-100">
+        <div class="card-body text-center d-flex flex-column">
+          <i class="fas fa-file-alt fa-3x mb-3 text-primary"></i>
+          <h5 class="card-title">Mis Ofertas</h5>
+          <p class="card-text">Gestiona tus ofertas de empleo activas</p>
+  
+          {% if ofertas %}
+            <ul class="list-unstyled text-start mb-3" style="max-height: 180px; overflow-y: auto;">
+              {% for oferta in ofertas %}
+                <li><strong>{{ oferta.titulo }}</strong> <br> <small class="text-muted">{{ oferta.fecha_publicacion.strftime('%Y-%m-%d') }}</small></li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">No tienes ofertas publicadas aún.</p>
+          {% endif %}
+  
+          <a href="{{ url_for('crear_oferta') }}" class="btn btn-red mt-auto">Crear Nueva Oferta</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body text-center">
+          <i class="fas fa-users fa-3x mb-3 text-success"></i>
+          <h5 class="card-title">Candidatos</h5>
+          <p class="card-text">Consulta perfiles de candidatos interesados</p>
+          <a href="{{ url_for('ver_candidatos') }}" class="btn btn-red">Ver Candidatos</a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body text-center">
+          <i class="fas fa-building fa-3x mb-3 text-warning"></i>
+          <h5 class="card-title">Mi Empresa</h5>
+          <p class="card-text">Actualiza la información de tu empresa</p>
+            <a href="{{ url_for('editar_emp') }}" class="btn btn-red">Editar Perfil</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light">
+          <h5 class="mb-0">Ofertas Activas</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Título</th>
+                  <th>Fecha de publicación</th>
+                  <th>Candidatos</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if ofertas %}
+                {% for oferta in ofertas %}
+                <tr>
+                  <td>{{ oferta.titulo }}</td>
+                  <td>{{ oferta.fecha_publicacion.strftime('%Y-%m-%d') }}</td>
+                  <td>
+                    {% if oferta.postulaciones %}
+                      <button class="btn btn-sm btn-info" data-bs-toggle="collapse" data-bs-target="#candidatos-{{ oferta.id_oferta }}">
+                        Ver ({{ oferta.postulaciones | length }})
+                      </button>
+                      <div class="collapse mt-2" id="candidatos-{{ oferta.id_oferta }}">
+                        <ul>
+                          {% for postulacion in oferta.postulaciones %}
+                            <li>{{ postulacion.usuario.nombre }} (Postulado a: {{ oferta.titulo }})</li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    {% else %}
+                      <span class="text-muted">Sin candidatos</span>
+                    {% endif %}
+                  </td>
+                  <td>{{ oferta.estado }}</td>
+                    <td>
+                      <a href="{{ url_for('editar_oferta', id_oferta=oferta.id_oferta) }}" class="btn btn-sm btn-warning me-1">
+                        Editar
+                      </a>
+                      <form action="{{ url_for('eliminar_oferta', id_oferta=oferta.id_oferta) }}" method="post" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta oferta?');">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                          Eliminar
+                        </button>
+                      </form>
+                    </td>                    
+                </tr>
+                {% endfor %}                        
+                {% else %}
+                  <tr>
+                    <td colspan="5" class="text-center">No hay ofertas activas actualmente</td>
+                  </tr>
+                {% endif %}
+              </tbody>              
+            </table>
+          </div>
+        </div>
+        <div class="card-footer text-end">
+          <a href="{{ url_for('crear_oferta') }}" class="btn btn-red">Crear Nueva Oferta</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    // Función para hacer que los mensajes desaparezcan después de unos segundos
+    setTimeout(function() {
+      const alerts = document.querySelectorAll('.alert');
+      alerts.forEach(function(alert) {
+        alert.classList.add('fade');
+      });
+    }, 3000); // El mensaje se desvanece después de 3 segundos
+  </script>
+{% endblock %}

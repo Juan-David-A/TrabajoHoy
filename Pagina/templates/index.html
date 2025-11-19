@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}TrabajoHoy - Inicio{% endblock %}
+
+{% block content %}
+<!-- Mostrar los mensajes flash justo debajo de la navbar -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="alert-container">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<!-- Hero section -->
+<div class="hero-section">
+  <div class="container">
+    <div class="row align-items-center min-vh-75">
+      <div class="col-lg-6">
+        <h1 class="display-4 fw-bold mb-4">Conectamos talento con oportunidades</h1>
+        <p class="lead mb-4">En TrabajoHoy facilitamos la conexión entre profesionales y empresas para crear relaciones laborales exitosas.</p>
+        
+        {% if not session.get('usuario_id') and not session.get('empresa_id') %}
+        <div class="d-grid gap-3 d-md-flex">
+          <a href="/registro" class="btn btn-primary btn-lg">Registrarme como Candidato</a>
+          <a href="/registro_empresa" class="btn btn-outline-primary btn-lg">Registrar mi Empresa</a>
+        </div>
+        {% endif %}
+      </div>
+      <div class="col-lg-6 d-none d-lg-block">
+        <img src="https://via.placeholder.com/600x400" alt="Ilustración trabajo" class="img-fluid rounded shadow-lg">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sección de características -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center mb-5">
+      <div class="col-lg-8 mx-auto">
+        <h2 class="fw-bold">¿Qué ofrecemos?</h2>
+        <p class="lead">Soluciones para empresas y candidatos</p>
+      </div>
+    </div>
+    
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="feature-icon bg-primary bg-gradient rounded-circle mb-4">
+              <i class="bi bi-person-check-fill text-white fs-2"></i>
+            </div>
+            <h3 class="fs-4 fw-bold">Para Candidatos</h3>
+            <p class="mb-4">Accede a las mejores ofertas laborales, crea un perfil profesional destacado y conecta con empresas que buscan tu talento.</p>
+            <a href="/login" class="btn btn-outline-primary">Acceder como Candidato</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body text-center p-4">
+            <div class="feature-icon bg-success bg-gradient rounded-circle mb-4">
+              <i class="bi bi-building text-white fs-2"></i>
+            </div>
+            <h3 class="fs-4 fw-bold">Para Empresas</h3>
+            <p class="mb-4">Publica ofertas de trabajo, encuentra candidatos ideales para tus vacantes y gestiona todo el proceso de contratación.</p>
+            <a href="/login_empresa" class="btn btn-outline-success">Acceder como Empresa</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    // Función para hacer que los mensajes desaparezcan después de unos segundos
+    setTimeout(function() {
+      const alerts = document.querySelectorAll('.alert');
+      alerts.forEach(function(alert) {
+        alert.classList.add('fade');
+      });
+    }, 3000); // El mensaje se desvanece después de 3 segundos
+  </script>
+{% endblock %}

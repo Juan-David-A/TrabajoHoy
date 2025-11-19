@@ -1,0 +1,119 @@
+<style>
+  .contenedor-ofertas {
+    max-width: 480px;
+    margin: 40px auto;
+    padding: 30px 25px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .contenedor-ofertas h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 700;
+  }
+
+  .lista-ofertas {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .lista-ofertas li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+  }
+
+  .lista-ofertas li:hover {
+    border-color: #007bff;
+    background-color: #f9faff;
+  }
+
+  .lista-ofertas strong {
+    font-size: 1.1rem;
+    color: #222;
+  }
+
+  .postular-btn {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+
+  .postular-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .volver-link {
+    display: block;
+    margin: 25px auto 0;
+    max-width: 480px;
+    text-align: center;
+    font-weight: 600;
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+
+  .volver-link:hover {
+    text-decoration: underline;
+  }
+</style>
+
+
+<div class="contenedor-ofertas">
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div style="
+            padding: 10px; 
+            border-radius: 5px; 
+            margin-bottom: 15px;
+            {% if category == 'success' %}
+              background-color: #d4edda; color: #155724;
+            {% elif category == 'danger' %}
+              background-color: #f8d7da; color: #721c24;
+            {% else %}
+              background-color: #cce5ff; color: #004085;
+            {% endif %}
+          ">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <h2>Ofertas de {{ empresa.nombre }}</h2>
+
+  <!-- Aquí sigue el resto de tu código -->
+  <ul class="lista-ofertas">
+    {% for oferta in ofertas %}
+      <li>
+        <strong>{{ oferta.titulo }}</strong>
+        <form action="{{ url_for('postular', id_oferta=oferta.id_oferta) }}" method="post" style="margin: 0;">
+          <button type="submit" title="Postular a {{ oferta.titulo }}" class="postular-btn">+</button>
+        </form>
+      </li>
+    {% else %}
+      <li style="text-align:center; color:#666; font-style: italic;">No hay ofertas activas.</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{{ url_for('inicio') }}" class="volver-link">← Volver</a>
+</div>

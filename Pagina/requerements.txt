@@ -1,0 +1,4 @@
+version = pip 25.0.1
+pip install flask
+flask version = flask 3.1.0
+bootstrap version = 5.1.3-dist 

@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+{% block title %}TrabajoHoy - Principal{% endblock %}
+{% block content %}
+
+<div class="contenedor-principal">
+
+    <div class="contenido">
+        <aside class="barra-lateral-izquierda">
+            <div class="perfil-usuario">
+                <div class="foto">
+                    {% if session['usuario_foto'] %}
+                        <img src="{{ url_for('static', filename='fotos/' ~ session['usuario_foto']) }}" class="rounded-circle me-3" width="80" height="80" alt="Foto de perfil">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='img/default_user.png') }}" class="rounded-circle me-3" width="80" height="80" alt="Foto de perfil">
+                    {% endif %}
+                </div>
+                <div class="info">
+                    <strong>
+                        {% if usuario_nombre %}
+                            {{ usuario_nombre }}
+                        {% else %}
+                            Invitado
+                        {% endif %}
+                    </strong>
+                    <p>Bogotá, Colombia</p>
+                </div>
+            </div>
+            <div class="seccion">
+                <h3>Empresas</h3>
+                <p>Agregar empresas a aspirar</p>
+                <ul>
+                    {% for empresa in empresas %}
+                        <li>
+                            {{ empresa.nombre }}
+                            <a href="{{ url_for('ofertas_empresa', id_empresa=empresa.id_empresa) }}" 
+                               style="font-weight:bold; color:#007bff; text-decoration:none; margin-left:5px;">+</a>
+                        </li>
+                    {% else %}
+                        <li>No hay empresas registradas.</li>
+                    {% endfor %}
+                </ul>                
+            </div>
+            <script>
+                function toggleOfertas(id) {
+                    const lista = document.getElementById('ofertas-' + id);
+                    lista.style.display = lista.style.display === 'none' ? 'block' : 'none';
+                    
+                    // Ocultar otras listas
+                    document.querySelectorAll('[id^="ofertas-"]').forEach(el => {
+                        if (el.id !== 'ofertas-' + id) {
+                            el.style.display = 'none';
+                        }
+                    });
+                }
+            </script>                    
+            <div class="seccion">
+                <h3>Empresas postuladas</h3>
+                <ul>
+                  {% for post in postulaciones %}
+                    <li>
+                      {% if post.oferta and post.oferta.empresa %}
+                        {{ post.oferta.titulo }} - {{ post.oferta.empresa.nombre }}
+                      {% else %}
+                        Información de la oferta no disponible
+                      {% endif %}
+                    </li>
+                  {% else %}
+                    <li>No has postulado a ninguna empresa aún.</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              
+            <div class="seccion">
+                <h3>Herramientas</h3>
+                <p>Elementos guardados <span>+</span></p>
+                <p>Eventos <span>+</span></p>
+                <p>Noticias <span>+</span></p>
+            </div>
+        </aside>
+
+        <main class="publicaciones">
+            <div class="crear-publicacion">
+                <div class="foto"></div>
+                <input type="text" placeholder="Crear publicación">
+                <div class="icono-buscar"></div>
+                <div class="multimedia">Contenido Multimedia</div>
+            </div>
+
+            {% if ofertas %}
+            {% for oferta in ofertas %}
+                <div class="publicacion">
+                    <div class="cabecera-publicacion">
+                        <div class="detalle">
+                            <strong>{{ oferta.empresa.nombre }}</strong>
+                            <p>{{ oferta.fecha_publicacion }} 🌎</p>
+                        </div>
+                    </div>
+                    <div class="contenido-publicacion">
+                        <p>{{ oferta.titulo }} - {{ oferta.descripcion | truncate(150) }}</p>
+                        {% if oferta.enlace %}
+                        <p><a href="{{ oferta.enlace }}" target="_blank">Más información</a></p>
+                        {% endif %}
+                        <form action="{{ url_for('postular', id_oferta=oferta.id_oferta) }}" method="post" style="margin-top:10px;">
+                            <button type="submit" class="btn btn-primary w-50">Postularme</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No hay ofertas laborales disponibles en este momento.</p>
+            {% endif %}
+
+        </main>
+
+        <aside class="barra-lateral-derecha">
+            <h3>Seguir empresas</h3>
+            <p><span class="logo google"></span> Google Company <span class="seguir">+ Seguir</span></p>
+            <p><span class="logo facebook"></span> Facebook Company <span class="seguir">+ Seguir</span></p>
+            <p><span class="logo adidas"></span> Adidas <span class="seguir">+ Seguir</span></p>
+            <p class="ver-mas">Ver más...</p>
+        </aside>
+    </div>
+</div>
+
+{% endblock %}

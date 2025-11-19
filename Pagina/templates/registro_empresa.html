@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block title %}TrabajoHoy - Registro de Empresa{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="alert-container">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="login-background"></div>
+
+<section class="auth-section container my-5 py-5 animate-fadeIn">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card auth-card shadow-lg rounded">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Registro de Empresa</h3>
+
+          <form action="/registro_empresa" method="post">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre de la empresa</label>
+              <input type="text" name="nombre" id="nombre" class="form-control input-field" required>
+            </div>
+            <div class="mb-3">
+              <label for="direccion" class="form-label">Dirección</label>
+              <input type="text" name="direccion" id="direccion" class="form-control input-field" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo electrónico corporativo</label>
+              <input type="email" name="email" id="email" class="form-control input-field" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" name="password" id="password" class="form-control input-field" required>
+            </div>
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono de contacto</label>
+              <input type="tel" name="telefono" id="telefono" class="form-control input-field" required>
+            </div>
+            <div class="mb-3">
+              <label for="nit" class="form-label">NIT</label>
+              <input type="text" name="nit" id="nit" class="form-control input-field" required>
+            </div>
+            <div class="mb-3">
+              <label for="descripcion" class="form-label">Descripción</label>
+              <textarea name="descripcion" id="descripcion" class="form-control input-field"></textarea>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-red">Registrar Empresa</button>
+            </div>
+          </form>
+          <hr>
+          <div class="text-center">
+            <p>¿Ya tienes cuenta como empresa?</p>
+            <a href="/login_empresa" class="btn btn-outline-red">Iniciar sesión</a>
+          </div>
+          <div class="text-center mt-3">
+            <a href="/registro" class="link-custom">¿Eres un candidato? Regístrate aquí</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

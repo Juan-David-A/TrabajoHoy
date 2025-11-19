@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}Crear Nueva Oferta{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2>Crear Nueva Oferta</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="alert-container">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <form method="POST" action="{{ url_for('crear_oferta') }}">
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título de la Oferta</label>
+      <input type="text" class="form-control" id="titulo" name="titulo" required>
+    </div>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea class="form-control" id="descripcion" name="descripcion" rows="5" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Publicar Oferta</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard - TrabajoHoy{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Lista de Usuarios</h2>
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Habilidades</th>
+        <th>Experiencia</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in usuarios %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.nombre }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.habilidades }}</td>
+        <td>{{ u.experiencia }}</td>
+        <td>
+          <a href="{{ url_for('editar_usuario', id=u.id) }}" class="btn btn-sm btn-warning">Editar</a>
+          <a href="{{ url_for('eliminar_usuario', id=u.id) }}" class="btn btn-sm btn-danger">Eliminar</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

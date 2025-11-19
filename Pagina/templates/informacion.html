@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block title %}TrabajoHoy - Información{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+  <h2 class="text-center mb-5">Sobre Nosotros</h2>
+
+  <!-- Sección de Misión -->
+  <div class="mb-5 section-blue p-4 rounded">
+    <h4 class="text-white">Misión</h4>
+    <p class="text-white">
+      Facilitar la conexión entre talentos y oportunidades laborales, brindando una plataforma confiable, intuitiva y accesible para quienes buscan crecer profesionalmente y para las empresas que buscan el mejor recurso humano.
+    </p>
+  </div>
+  <div class="mb-5 text-center">
+    <img src="{{ url_for('static', filename='img/img5.jpg') }}" alt="Imagen de Información" class="img-fluid" style="max-width: 25%; height: auto;">
+  </div>
+  <!-- Sección de Visión -->
+  <div class="mb-5 section-blue p-4 rounded">
+    <h4 class="text-white">Visión</h4>
+    <p class="text-white">
+      Ser la plataforma líder en búsqueda de empleo en Latinoamérica, transformando la forma en que las personas encuentran trabajo y las empresas encuentran talento.
+    </p>
+  </div>
+
+  <div class="mb-5 text-center">
+    <img src="{{ url_for('static', filename='img/img6.jpg') }}" alt="Imagen de Información" class="img-fluid" style="max-width: 20%; height: auto;">
+  </div>
+
+  <!-- Sección de Nuestro Equipo -->
+  <div class="mb-5 section-blue p-4 rounded text-center">
+    <h4 class="text-white">Nuestro Equipo</h4>
+
+    <div class="mb-3">
+        <strong class="text-white">Luis Rodelo</strong>
+    </div>
+    <div class="mb-3">
+        <strong class="text-white">Juan Aldana</strong>
+    </div>
+    <div class="mb-3">
+        <strong class="text-white">Kevin Forero</strong>
+    </div>
+    <div class="mb-3">
+        <strong class="text-white">Marlon Guzmán</strong>
+    </div>
+    <div class="mb-3">
+        <strong class="text-white">Stefania Villamarin</strong>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

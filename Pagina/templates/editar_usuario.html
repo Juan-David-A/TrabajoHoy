@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Editar Usuario - TrabajoHoy{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Editar Usuario</h2>
+  <form method="POST">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" value="{{ usuario.nombre }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" value="{{ usuario.email }}" required disabled>
+    </div>
+    <div class="mb-3">
+      <label for="habilidades" class="form-label">Habilidades</label>
+      <input type="text" class="form-control" id="habilidades" name="habilidades" value="{{ usuario.habilidades }}">
+    </div>
+    <div class="mb-3">
+      <label for="experiencia" class="form-label">Experiencia</label>
+      <input type="text" class="form-control" id="experiencia" name="experiencia" value="{{ usuario.experiencia }}">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Nueva Contraseña</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="Dejar en blanco si no desea cambiarla">
+    </div>
+    <div class="mb-3">
+      <label for="confirmar_password" class="form-label">Confirmar Nueva Contraseña</label>
+      <input type="password" class="form-control" id="confirmar_password" name="confirmar_password" placeholder="Confirmar nueva contraseña (si la cambia)">
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary ms-2">Volver al Dashboard</a> <!-- Botón de volver -->
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Editar Oferta{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2>Editar Oferta</h2>
+  <form method="POST">
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input type="text" class="form-control" id="titulo" name="titulo" value="{{ oferta.titulo }}" required>
+    </div>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea class="form-control" id="descripcion" name="descripcion" rows="5" required>{{ oferta.descripcion }}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+  </form>
+</div>
+{% endblock %}

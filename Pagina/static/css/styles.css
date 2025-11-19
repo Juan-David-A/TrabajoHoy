@@ -1,0 +1,591 @@
+/* ---------------------------
+   CONFIGURACIÓN GENERAL
+--------------------------- */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333;
+  }
+  
+  /* Titulos y párrafos */
+  h1, h2, h3, h4, h5 {
+    font-weight: 700;
+  }
+  p, li {
+    font-weight: 400;
+  }
+  
+  /* Enlaces */
+  a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  /* ---------------------------
+     NAVBAR Y HEADER
+  --------------------------- */
+  .nav-gradient {
+    background: linear-gradient(90deg, #1B0A8F, #281d71);
+    border-bottom: 4px solid #f52b2b;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .navbar-nav .nav-link {
+    margin: 0 8px;
+    font-weight: 600;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #ffbf00;
+    transform: scale(1.05);
+  }
+  
+  /* Aseguramos que el header fijo no tape el contenido */
+  .main-content {
+    padding-top: 100px;
+  }
+  
+  /* ---------------------------
+     HERO SECTION
+  --------------------------- */
+  .hero-container {
+    width: 100%;
+    min-height: 350px;
+    background: linear-gradient(180deg, #1B0A8F 0%, #281d71 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-title {
+    color: #fff;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    margin-bottom: 0.5rem;
+  }
+  
+  .hero-subtitle {
+    color: #dcdcdc;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Buscador */
+  .search-box {
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .input-group-text.search-icon {
+    background-color: #fff;
+    border: none;
+    border-radius: 8px 0 0 8px;
+    font-size: 1.5rem;
+  }
+  
+  .search-input {
+    border: none;
+    border-radius: 0 8px 8px 0;
+    padding: 0.75rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  /* ---------------------------
+     SECCIÓN DE INFORMACIÓN
+  --------------------------- */
+  .info-section {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 40px;
+    margin-top: -50px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .mockup-img {
+    max-width: 220px;
+    border: 3px solid #e0e0e0;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+  
+  .mockup-img:hover {
+    transform: scale(1.05);
+  }
+  
+  .info-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .info-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .info-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .info-list li {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .check-icon {
+    color: #0bab0b;
+    font-size: 1.2rem;
+    margin-right: 8px;
+  }
+  
+  /* ---------------------------
+     BOTONES Y LLAMADAS A LA ACCIÓN
+  --------------------------- */
+  .btn-red, .btn-outline-red {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 0.8rem 1.5rem;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  
+  .btn-red {
+    background-color: #f52b2b;
+    border: none;
+    color: #fff;
+  }
+  
+  .btn-red:hover {
+    background-color: #d02121;
+    transform: translateY(-3px);
+  }
+  
+  .btn-outline-red {
+    background-color: transparent;
+    border: 2px solid #f52b2b;
+    color: #f52b2b;
+  }
+  
+  .btn-outline-red:hover {
+    background-color: #f52b2b;
+    color: #fff;
+  }
+  
+  /* Efecto pulsante para CTA */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  /* ---------------------------
+     FORMULARIOS (LOGIN/REGISTRO)
+  --------------------------- */
+  .auth-section {
+    min-height: 400px;
+  }
+  
+  .auth-card {
+    border: none;
+    border-radius: 12px;
+  }
+  
+  .input-field {
+    border: 2px solid #281d71;
+    border-radius: 8px;
+    padding: 0.75rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .input-field:focus {
+    border-color: #1B0A8F;
+    box-shadow: 0 0 8px rgba(27,10,143,0.3);
+  }
+  
+  /* ---------------------------
+     FOOTER
+  --------------------------- */
+  .footer-section {
+    background: linear-gradient(90deg, #1B0A8F, #281d71);
+  }
+  
+  .footer-section .footer-link {
+    color: #f5f5f5;
+    font-weight: 600;
+  }
+  
+  .footer-section .footer-link:hover {
+    color: #ffbf00;
+  }
+  
+  /* ---------------------------
+     ANIMACIONES
+  --------------------------- */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fadeInDown {
+    animation: fadeInDown 1s ease-out;
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 1s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 1s ease-out;
+  }
+  
+  @keyframes slideInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-slideInUp {
+    animation: slideInUp 1s ease-out;
+  }
+  
+  /* ---------------------------
+     FUNCIONES ADICIONALES CREATIVAS
+  --------------------------- */
+  /* Efecto parallax en la sección hero */
+  .hero-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/hero-bg-overlay.png') center/cover no-repeat;
+    opacity: 0.2;
+    z-index: 1;
+    transform: translateY(0);
+    transition: transform 0.5s ease-out;
+  }
+  
+  .hero-container:hover::before {
+    transform: translateY(-10px);
+  }
+  
+  /* Sombra interna para info-section */
+  .info-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+    z-index: -1;
+  }
+  
+  /* Transición suave en todos los elementos interactivos */
+  button, .input-field, .nav-link, .btn-red, .btn-outline-red {
+    transition: all 0.3s ease;
+  }
+  
+  /* Efecto de hover en tarjetas de empleo (si las agregas posteriormente) */
+  .empleo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  }
+  
+  /* Bordes redondeados generales para imágenes */
+  img {
+    border-radius: 8px;
+  }
+  
+  /* Efecto de zoom en imágenes al hacer hover */
+  img:hover {
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
+  }
+  
+  /* Ajustes responsivos */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+    .info-section {
+      padding: 20px;
+    }
+    .mockup-img {
+      max-width: 180px;
+    }
+  }
+  
+.login-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../img/img3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.section-blue {
+  background-color: #1B0A8F; 
+  color: white;
+}
+.text-center {
+  text-align: center;
+}
+
+
+.auth-card {
+  background-color: rgba(208, 182, 182, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+/* Estilos para los mensajes flash */
+.alert-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+}
+
+.alert {
+  display: block;
+  margin: 10px;
+}
+
+/* Centrar la alerta en la pantalla */
+.alert-container {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050; 
+  width: auto;
+  max-width: 500px; 
+}
+
+/* Aumentar el tamaño del botón de cierre */
+.alert .btn-close {
+  font-size: 1.5rem; 
+  padding: 0.5rem;  
+  position: absolute;
+  top: 10px;
+  right: 10px; 
+}
+
+.success {
+    background-color: #28a745;
+    color: white;
+}
+
+.danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* ===== INICIO: Contenedor y distribución ===== */
+.contenedor-principal .contenido {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+/* ===== FIN: Contenedor y distribución ===== */
+
+
+/* ===== INICIO: Barra lateral izquierda ===== */
+.barra-lateral-izquierda .perfil-usuario {
+  background: #d1d5db;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+}
+.barra-lateral-izquierda .perfil-usuario .foto {
+  width: 80px;
+  height: 80px;
+  background: #000;
+  border-radius: 12px;
+  margin: 0 auto 10px;
+}
+.barra-lateral-izquierda .perfil-usuario .info strong {
+  display: block;
+  font-size: 16px;
+}
+.barra-lateral-izquierda .perfil-usuario .info p {
+  font-size: 14px;
+  color: #555;
+}
+.barra-lateral-izquierda .seccion {
+  background: #d1d5db;
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 15px;
+}
+.barra-lateral-izquierda .seccion h3 {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+.barra-lateral-izquierda .seccion p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+.barra-lateral-izquierda .seccion span {
+  float: right;
+  font-weight: bold;
+}
+/* ===== FIN: Barra lateral izquierda ===== */
+
+
+/* ===== INICIO: Sección de crear publicación ===== */
+.crear-publicacion {
+  background: #cfd4dc;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.crear-publicacion .foto {
+  width: 40px;
+  height: 40px;
+  background: #000;
+  border-radius: 8px;
+}
+.crear-publicacion input {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+}
+.crear-publicacion .icono-buscar {
+  width: 24px;
+  height: 24px;
+  background: #8b94aa;
+  border-radius: 50%;
+}
+/* ===== FIN: Sección de crear publicación ===== */
+
+
+/* ===== INICIO: Tarjeta de publicación ===== */
+.publicacion {
+  background: #d1d5db;
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+.publicacion .cabecera-publicacion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.publicacion .logo-empresa {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #000;
+}
+.publicacion .detalle strong {
+  display: block;
+  font-size: 16px;
+}
+.publicacion .detalle p {
+  font-size: 12px;
+  color: #555;
+}
+.publicacion .seguir {
+  font-weight: bold;
+  cursor: pointer;
+}
+.publicacion .contenido-publicacion p {
+  font-size: 14px;
+  margin: 10px 0;
+}
+.publicacion .imagen-publicacion {
+  width: 100%;
+  height: 180px;
+  background: #fff;
+  border-radius: 8px;
+}
+/* ===== FIN: Tarjeta de publicación ===== */
+
+
+/* ===== INICIO: Barra lateral derecha ===== */
+.barra-lateral-derecha {
+  background: #d1d5db;
+  border-radius: 12px;
+  padding: 15px;
+}
+.barra-lateral-derecha h3 {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+.barra-lateral-derecha .logo {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: #000;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+.barra-lateral-derecha .seguir {
+  float: right;
+  font-weight: bold;
+  cursor: pointer;
+}
+.barra-lateral-derecha .ver-mas {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+/* ===== FIN: Barra lateral derecha ===== */

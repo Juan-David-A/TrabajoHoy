@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}Perfil - TrabajoHoy{% endblock %}
+
+{% block content %}
+<div class="container my-5 py-5 animate-fadeIn">
+  <div class="row justify-content-center">
+    <div class="col-md-8 bg-light p-4 rounded shadow">
+      <!-- Encabezado con nombre y foto -->
+      <div class="d-flex align-items-center mb-4">
+        {% if usuario.foto_url %}
+          <img src="{{ url_for('static', filename='fotos/' ~ usuario.foto_url) }}" class="rounded-circle me-3" width="80" height="80" alt="Foto de perfil">
+        {% else %}
+          <img src="{{ url_for('static', filename='img/default_user.png') }}" class="rounded-circle me-3" width="80" height="80" alt="Foto de perfil">
+        {% endif %}
+        <div>
+          <h3 class="mb-0">{{ session['usuario_nombre'] }}</h3>
+          <small class="text-muted">Mi perfil profesional</small>
+        </div>
+      </div>
+
+      <form action="/actualizar_perfil" method="POST" enctype="multipart/form-data">
+        <!-- Experiencia Laboral -->
+        <div class="mb-3">
+          <label for="experiencia" class="form-label fw-semibold">Experiencia Laboral</label>
+          <textarea class="form-control" name="experiencia" rows="4" placeholder="Describe tu experiencia laboral...">{{ usuario.experiencia }}</textarea>
+        </div>
+
+        <!-- Habilidades -->
+        <div class="mb-3">
+          <label for="habilidades" class="form-label fw-semibold">Habilidades</label>
+          <textarea class="form-control" name="habilidades" rows="3" placeholder="Ejemplo: Excel, Liderazgo, JavaScript...">{{ usuario.habilidades }}</textarea>
+        </div>
+
+        <!-- Foto de Perfil -->
+        <div class="mb-3">
+          <label for="foto_perfil" class="form-label fw-semibold">Foto de Perfil (JPG/PNG, max 2MB)</label>
+          <input class="form-control" type="file" name="foto_perfil" accept="image/png, image/jpeg">
+          {% if usuario.foto_url %}
+            <div class="mt-2">
+              <img src="{{ url_for('static', filename='fotos/' ~ usuario.foto_url) }}" alt="Foto de perfil actual" class="rounded-circle" width="100" height="100">
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Subida de archivo PDF -->
+        <div class="mb-3">
+          <label for="cv_archivo" class="form-label fw-semibold">Subir Hoja de Vida (PDF)</label>
+          <input class="form-control" type="file" name="cv_archivo" accept=".pdf">
+          {% if usuario.cv_url %}
+            <div class="mt-2">
+              <a href="{{ url_for('static', filename='cv/' ~ usuario.cv_url) }}" target="_blank" class="btn btn-outline-primary">
+                Ver Hoja de Vida
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-red w-100 mt-3">Actualizar Perfil</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

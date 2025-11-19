@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+{% block title %}TrabajoHoy - Login{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="alert-container">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="login-background d-flex align-items-center justify-content-center">
+  <section class="auth-section container my-5 py-5 animate-fadeIn">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card auth-card shadow-lg rounded">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Inicia sesión en TrabajoHoy</h3>
+
+            <form action="/login" method="post">
+              <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="email" name="email" id="email" class="form-control input-field" placeholder="usuario@ejemplo.com" required value="{{ request.form['email'] if request.form['email'] else '' }}">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" name="password" id="password" class="form-control input-field" placeholder="Contraseña" required>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-red">Iniciar sesión</button>
+              </div>
+              <div class="text-center mt-3">
+                <a href="/recuperar" class="link-custom">¿Olvidaste tu contraseña?</a>
+              </div>
+            </form>
+            <hr>
+            <div class="text-center">
+              <p>¿No tienes cuenta?</p>
+              <a href="/registro" class="btn btn-outline-red">Regístrate</a>            
+            </div>
+            <br>
+            <div class="text-center">
+              <a href="/registro_empresa" class="btn btn-outline-red">Regístro Empresa</a>
+            </div>
+            <div class="text-center mt-3">
+              <a href="/login_empresa" class="link-custom">¿Eres una empresa? Inicia sesión aquí</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    // Función para hacer que los mensajes desaparezcan después de unos segundos
+    setTimeout(function() {
+      const alerts = document.querySelectorAll('.alert');
+      alerts.forEach(function(alert) {
+        alert.classList.add('fade');
+      });
+    }, 3000); // El mensaje se desvanece después de 3 segundos
+  </script>
+{% endblock %}

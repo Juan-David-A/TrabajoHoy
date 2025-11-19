@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}TrabajoHoy - Registro{% endblock %}
+
+{% block content %}
+<!-- Mostrar mensajes flash debajo del nav -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="alert-container">
+      {% for category, message in messages %}
+        <div class="alert {{ category }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<div class="login-background"></div>  <!-- Fondo de pantalla completa -->
+
+<section class="auth-section container my-5 py-5 animate-fadeIn">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card auth-card shadow-lg rounded">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">Regístrate en TrabajoHoy</h3>
+
+          <form action="/registro" method="post">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre completo</label>
+              <input type="text" name="nombre" class="form-control input-field" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input type="email" name="email" class="form-control input-field" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <input type="password" name="password" class="form-control input-field" required>
+            </div>
+            <div class="mb-3">
+              <label for="experiencia" class="form-label">Experiencia</label>
+              <textarea name="experiencia" class="form-control input-field" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="habilidades" class="form-label">Habilidades</label>
+              <textarea name="habilidades" class="form-control input-field" rows="3"></textarea>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-red">Registrarse</button>
+            </div>
+          </form>
+          <hr>
+          <div class="text-center">
+            <p>¿Ya tienes cuenta?</p>
+            <a href="/login" class="btn btn-outline-red">Iniciar sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
